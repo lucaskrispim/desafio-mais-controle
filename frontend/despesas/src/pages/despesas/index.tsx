@@ -84,7 +84,7 @@ const Despesas: React.FC = () => {
               ))
             }
 
-
+            <tr><td>Total</td>R$ {despesas.reduce((a, b) => +a + +b.value, 0).toFixed(2)}</tr>
           </tbody>
         </Table>
       </div>
