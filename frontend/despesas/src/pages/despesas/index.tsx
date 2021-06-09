@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Col} from 'react-bootstrap';
-import {useHistory} from 'react-router-dom';
+import { Table, Button, Col } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import { formatLocalDate } from "../../utils/format";
 
@@ -35,15 +35,15 @@ const Despesas: React.FC = () => {
     }
   }
 
-  function newTask(){
+  function newTask() {
     history.push('/despesas_cadastro');
   }
 
-  function editDespesa(id: string){
+  function editDespesa(id: string) {
     history.push(`/despesas_cadastro/${id}`)
   }
 
-  async function deleteDespesa(id: string){
+  async function deleteDespesa(id: string) {
     try {
       await api.delete(`/despesa/delete/${id}`);
       loadDespesas();
@@ -61,7 +61,6 @@ const Despesas: React.FC = () => {
         <Table striped bordered hover className="text-center">
           <thead>
             <tr>
-
               <th>Descrição</th>
               <th>Valor</th>
               <th>Obra</th>
@@ -70,21 +69,18 @@ const Despesas: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-
             {
               despesas.map(despesa => (
                 <tr key={despesa.id}>
-
                   <td>{despesa.description}</td>
                   <td>R$ {despesa.value.toFixed(2)}</td>
                   <td>{despesa.obra.name}</td>
                   <td>{formatLocalDate(despesa.date, "dd/MM/yyyy")}</td>
-                  <td> <Button variant="warning" size="sm" onClick={()=>editDespesa(despesa.id)}>Editar</Button> <Button variant="danger" onClick={()=>deleteDespesa(despesa.id)} size="sm">Excluir</Button> </td>
+                  <td> <Button variant="warning" size="sm" onClick={() => editDespesa(despesa.id)}>Editar</Button> <Button variant="danger" onClick={() => deleteDespesa(despesa.id)} size="sm">Excluir</Button> </td>
                 </tr>
               ))
             }
-
-            <tr><td>Total</td>R$ {despesas.reduce((a, b) => +a + +b.value, 0).toFixed(2)}</tr>
+            <tr key={"soma"}><td>Total</td>R$ {despesas.reduce((a, b) => +a + +b.value, 0).toFixed(2)}</tr>
           </tbody>
         </Table>
       </div>

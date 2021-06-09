@@ -58,6 +58,7 @@ const Obras: React.FC = () => {
 
               <th>Nome</th>
               <th>Endereço</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
