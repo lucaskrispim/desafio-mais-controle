@@ -13,7 +13,17 @@ router.get('/',async (req, res) => {
     return res.status(400).json(err);
   }
   return res.status(200).json(response);
-})
+});
+
+router.get('/:id',async (req, res) => {
+  let response = null;
+  try {
+    response = await ObraService.getById(req.params.id);
+  }catch (err){
+    return res.status(400).json(err);
+  }
+  return res.status(200).json(response);
+});
 
 router.post('/create', checkSchema(ObraCreate),async (req,res)=>{
   let response = null;

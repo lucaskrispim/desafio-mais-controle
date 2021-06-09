@@ -32,6 +32,10 @@ const despesa = {
     },
     errorMessage: 'Campo endereço inválido!',
   },
+  date:{
+    in: 'body',
+    isDate: true,
+  }
 }
 
 module.exports = despesa;

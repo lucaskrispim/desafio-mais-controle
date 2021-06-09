@@ -17,6 +17,9 @@ class Obra extends Model{
             updatedAt: 'updatedAt',
         })
     }
+    static associate(models){
+        this.hasMany(models.Despesa,{foreignKey:'obra_id', as: 'despesas'});
+    }
 }
 
 module.exports = Obra;

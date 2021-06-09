@@ -6,9 +6,9 @@ class Despesa extends Model {
         super.init({
             id: { type: DataTypes.UUIDV4, primaryKey: true, field: 'id', defaultValue: DataTypes.UUIDV4 },
             obra_id: DataTypes.UUIDV4,
-            obra_name: DataTypes.STRING,
             value: DataTypes.FLOAT,
             description: DataTypes.STRING,
+            date:DataTypes.DATE,
             createdAt: { type: DataTypes.DATE, field: 'created_at' },
             updatedAt: { type: DataTypes.DATE, field: 'updated_at' },
         }, {
@@ -20,7 +20,7 @@ class Despesa extends Model {
         })
     }
     static associate(models) {
-        this.belongsTo(models.obra, { foreignKey: 'obra_id', as: 'obra' });
+        this.belongsTo(models.Obra, { foreignKey: 'obra_id', as: 'obra' });
     }
 }
 

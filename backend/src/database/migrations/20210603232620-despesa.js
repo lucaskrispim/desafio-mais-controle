@@ -15,16 +15,16 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade',
       },
-      obra_name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       value: {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
       description: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      date: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
       created_at: {

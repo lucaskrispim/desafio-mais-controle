@@ -10,6 +10,15 @@ class ObraService {
     }
   };
 
+  static async getById(id) {
+    try {
+      const obra = await Obra.findOne({ where: { "id": id } });
+      return obra;
+    } catch (error) {
+      return error;
+    }
+  }
+
 
   static async create(body) {
     try {

@@ -17,9 +17,10 @@ Truck.init(connection);
 Position.associate(connection.models);
 */
 
-Obra.init(connection);
 Despesa.init(connection);
-//Obra.associate(connection.models);
+Obra.init(connection);
+Despesa.associate(connection.models);
+Obra.associate(connection.models);
 
 
 (async () => {

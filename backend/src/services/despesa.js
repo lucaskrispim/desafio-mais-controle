@@ -5,23 +5,31 @@ const Obra = require('../models/obra');
 class DespesaService {
   static async getAll() {
     try {
-      const despesa = await Despesa.findAll({ raw: true });
+      const despesa = await Despesa.findAll({ include: {association:'obra'} });
       return despesa;
     } catch (error) {
       return error;
     }
   }
 
+  static async getById(id) {
+    try {
+      const despesa = await Despesa.findOne({ where: { "id": id },include: {association:'obra'}  });
+      return despesa;
+    } catch (error) {
+      return error;
+    }
+  }
 
   static async create(body) {
     try {
       const obra = await Obra.findOne({ where: { "name": body.obra } });
       if (obra) {
-        const { value, description } = body;
+        const { value, description, date } = body;
         const new_despesa = await Despesa.create({
           obra_id: obra.id,
-          obra_name: obra.name,
           value: value,
+          date: date,
           description: description,
         });
         return new_despesa;
@@ -38,12 +46,14 @@ class DespesaService {
 
     try {
       const despesa = await Despesa.findOne({ where: { "id": req.params.id } });
-      if (despesa) {
-
+      const obra = await Obra.findOne({ where: { "name":req.body.obra}});
+      if (despesa && obra) {
         await Despesa.update(
           {
             value: req.body.value,
-            description: req.body.description
+            description: req.body.description,
+            obra_id: obra.id,
+            date:req.body.date,
           },
           { where: { "id": req.params.id } });
         const modify_despesa = await Despesa.findOne({ where: { "id": req.params.id } });
