@@ -4,11 +4,15 @@ import {useHistory} from 'react-router-dom';
 import api from '../../services/api';
 import { formatLocalDate } from "../../utils/format";
 
+type obra = {
+  name: string
+}
+
 type DespesaData = {
   id: string,
   value: number,
   description: string,
-  obra: string,
+  obra: obra,
   date: string
 }
 
@@ -26,7 +30,6 @@ const Despesas: React.FC = () => {
       const response = await api.get('/despesa/');
 
       setDespesas(response.data);
-
     } catch (error) {
       console.log("deu erro");
     }
@@ -74,7 +77,7 @@ const Despesas: React.FC = () => {
 
                   <td>{despesa.description}</td>
                   <td>R$ {despesa.value.toFixed(2)}</td>
-                  <td>{despesa.obra}</td>
+                  <td>{despesa.obra.name}</td>
                   <td>{formatLocalDate(despesa.date, "dd/MM/yyyy")}</td>
                   <td> <Button variant="warning" size="sm" onClick={()=>editDespesa(despesa.id)}>Editar</Button> <Button variant="danger" onClick={()=>deleteDespesa(despesa.id)} size="sm">Excluir</Button> </td>
                 </tr>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Col, Form } from 'react-bootstrap';
-import {formatLocalDate} from '../../../utils/format';
+import { formatLocalDate } from '../../../utils/format';
 import api from '../../../services/api';
 
 type ObrasData = {
@@ -28,7 +28,7 @@ const DespesasForm: React.FC = () => {
     value: 0,
     description: '',
     date: '',
-    obra: ''
+    obra: '',
   });
 
 
@@ -41,7 +41,7 @@ const DespesasForm: React.FC = () => {
             value: response.data.value.toFixed(2),
             description: response.data.description,
             date: formatLocalDate(response.data.date, "yyyy-MM-dd"),
-            obra: response.data.obra,
+            obra: response.data.obra.name,
 
           });
         }
@@ -115,17 +115,17 @@ const DespesasForm: React.FC = () => {
 
         <Form.Group controlId="formData">
           <Form.Label>Data</Form.Label>
-          <Form.Control type="date" required name="date" value={model.date}  onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} />
+          <Form.Control type="date" required name="date" value={model.date} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>Obra</Form.Label>
           <Form.Control as="select" required name="obra" onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}>
-            <option key={1 || ""} value={model.obra ? model.obra : "Escolha..."} >{model.obra ? model.obra : "Escolha..."}</option>
+            <option key={"1"} value={model.obra} >{model.obra}</option>
             {
 
               obras.map(obra => (
-                <option key={obra.id} value={obra.name} >{obra.name}</option>
+                obra.name !== model.obra ? <option key={obra.id} value={obra.name} >{obra.name}</option>:""
               ))
             }
           </Form.Control>
