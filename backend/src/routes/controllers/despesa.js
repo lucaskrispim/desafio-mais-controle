@@ -7,7 +7,7 @@ const DespesaCreate = require('../schemas/despesa');
 router.get('/',async (req, res) => {
   let response = null;
   try {
-    response = await DespesaService.getAll()
+    response = await DespesaService.getAll(req)
   }catch (err){
     return res.status(400).json(err);
   }
