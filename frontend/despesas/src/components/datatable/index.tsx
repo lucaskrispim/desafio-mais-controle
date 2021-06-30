@@ -22,7 +22,7 @@ const DataTable = () => {
 
   const loadDespesas = async () => {
     try {
-      const response = await api.get(`/despesa/?page=${activePage}&size=3`);
+      const response = await api.get(`/despesa/?page=${activePage}&size=10`);
       setDespesasPage(response.data);
 
     } catch (error) {
@@ -34,7 +34,7 @@ const DataTable = () => {
 
     const loadDespesas = async () => {
       try {
-        const response = await api.get(`/despesa/?page=${activePage}&size=3`);
+        const response = await api.get(`/despesa/?page=${activePage}&size=10`);
         setDespesasPage(response.data);
   
       } catch (error) {

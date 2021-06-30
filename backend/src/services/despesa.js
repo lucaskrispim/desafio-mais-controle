@@ -5,8 +5,7 @@ const Obra = require('../models/obra');
 class DespesaService {
   static async getAll(req) {
     try {
-      console.log(req.query);
-
+      
       const limit = parseInt(req.query.size);
       const offset = 0 + (parseInt(req.query.page)) * limit
       
